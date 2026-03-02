@@ -74,6 +74,8 @@ CREATE TABLE bronze.erp_px_cat_g1v2(
     maintenance NVARCHAR(50)
 );
 
+
+-----------------------------------------------------------------------------------------------------------
 -- This stored procedure encapsulates reusable query logic for the ETL process.
   
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS 
