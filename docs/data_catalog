@@ -1,0 +1,90 @@
+DATA DICTIONARY FOR GOLD LAYER
+  
+# Overview
+
+The **Gold Layer** represents the final and business-ready layer of the Data Warehouse. It contains curated datasets designed for **analytics, reporting, and business intelligence**.
+
+This layer consists of:
+
+* **Dimension Tables** – Store descriptive attributes used to analyze business entities.
+* **Fact Tables** – Store measurable transactional data such as sales.
+
+The following tables are included in the Gold Layer:
+
+* **gold.dim_customers** (Customer Dimension)
+* **gold.dim_products** (Product Dimension)
+* **gold.fact_sales** (Sales Fact Table)
+
+---
+
+# gold.dim_customers
+
+## Purpose
+
+The **dim_customers** table is a **dimension table** that stores detailed descriptive information about customers.
+It enables business users to analyze sales and customer behavior based on attributes such as gender, country, and marital status.
+
+## Columns
+
+| Column Name      | Data Type    | Description                                                             |
+| ---------------- | ------------ | ----------------------------------------------------------------------- |
+| Customer_Key     | BIGINT       | Surrogate key uniquely identifying each customer in the dimension table |
+| Customer_id      | INT          | Original customer identifier from the source system                     |
+| Cusutomer_number | NVARCHAR(50) | Unique business/customer number used for identification                 |
+| First_Name       | NVARCHAR(50) | First name of the customer                                              |
+| Last_Name        | NVARCHAR(50) | Last name of the customer                                               |
+| Country          | NVARCHAR(50) | Country where the customer resides                                      |
+| Marital_Status   | NVARCHAR(50) | Marital status of the customer                                          |
+| Gender           | NVARCHAR(50) | Gender of the customer                                                  |
+| Birthdate        | DATE         | Date of birth of the customer                                           |
+| Create_Date      | DATE         | Date when the customer record was created in the system                 |
+
+---
+
+# gold.dim_products
+
+## Purpose
+
+The **dim_products** table is a **dimension table** that stores descriptive information about products.
+It allows business users to analyze sales performance across different **product categories, subcategories, and product lines**.
+
+## Columns
+
+| Column Name    | Data Type    | Description                                                            |
+| -------------- | ------------ | ---------------------------------------------------------------------- |
+| Product_Key    | BIGINT       | Surrogate key uniquely identifying each product in the dimension table |
+| Product_id     | INT          | Original product identifier from the source system                     |
+| Product_Number | NVARCHAR(50) | Unique product number used for product identification                  |
+| Product_Name   | NVARCHAR(50) | Name of the product                                                    |
+| Category_id    | NVARCHAR(50) | Identifier for the product category                                    |
+| Category       | NVARCHAR(50) | Category to which the product belongs                                  |
+| Subcategory    | NVARCHAR(50) | Subcategory of the product                                             |
+| maintenance    | NVARCHAR(50) | Maintenance classification of the product                              |
+| Cost           | INT          | Cost associated with producing or acquiring the product                |
+| Product_Line   | NVARCHAR(50) | Product line classification                                            |
+| Start_Date     | DATE         | Date when the product became available or active                       |
+
+---
+
+# gold.fact_sales
+
+## Purpose
+
+The **fact_sales** table is a **fact table** that stores transactional sales data.
+It records each sales transaction and links to the **customer and product dimension tables** using surrogate keys. This table is used for analyzing **sales performance, revenue, order quantities, and pricing**.
+
+## Columns
+
+| Column Name   | Data Type    | Description                                                    |
+| ------------- | ------------ | -------------------------------------------------------------- |
+| Order_Number  | NVARCHAR(50) | Unique identifier for each sales order                         |
+| product_key   | BIGINT       | Foreign key referencing the product in the product dimension   |
+| Customer_Key  | BIGINT       | Foreign key referencing the customer in the customer dimension |
+| Order_Date    | DATE         | Date when the order was placed                                 |
+| Shipping_date | DATE         | Date when the order was shipped                                |
+| Due_Date      | DATE         | Expected delivery date for the order                           |
+| Sales_amount  | INT          | Total sales amount for the order                               |
+| Quantity      | INT          | Number of product units sold                                   |
+| sls_price     | INT          | Price per unit of the product sold                             |
+
+---
